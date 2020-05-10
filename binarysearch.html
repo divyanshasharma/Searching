@@ -1,0 +1,166 @@
+<html>
+<head>
+<title> Searching algorithms</title>
+<link href="binarysearch.css" rel="stylesheet" type="text/css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/lightbox.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <script src="js/lightbox-plus-jquery.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.7.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+</head>
+<body>
+
+    	<h1 class="heading">Binary Search</h1>
+        <ul>
+            <li><span>
+                    <a onclick="binarySearch()">Binary Search</a></span>
+                     
+                  </li>
+                  <li>
+                    <span  >
+                    <a onclick="toggle(this)">Algorithm</a> </span>
+            
+                   </li>
+                 
+                   <li>
+                    <span  >
+                     <a onclick="togglle(this)">Graphical Comparison</a></span>
+                      
+                   </li>
+                </ul>
+            
+                <div style="display:none;" id="cont">
+                    <p><br><br><br><br>
+                        <h2>Algorithm </h2><h4>(Recursive Approach)</h4>    <br>
+                        binarySearch(arr, x, low, high)<br>
+    if low > high<br>
+        return False <br>
+    else<br>
+        mid = (low + high) / 2 <br>
+        if x == arr[mid]<br>
+            return mid<br>
+        else if x < data[mid]        // x is on the right side <br>
+            return binarySearch(arr, x, mid + 1, high)<br>
+        else                               // x is on the right side<br>
+            return binarySearch(arr, x, low, mid - 1)<br>
+
+                      
+             
+                    </p>
+                </div>
+            </body>
+            <script>
+                function toggle(ele) {
+                    var cont = document.getElementById('cont');
+                    if (cont.style.display == 'block') {
+                        cont.style.display = 'none';
+            
+                        document.getElementById(ele.id).value = 'Show DIV';
+                    }
+                    else {
+                        cont.style.display = 'block';
+                        document.getElementById(ele.id).value = 'Hide DIV';
+                    }
+                }
+            </script>
+            
+            
+            <script>
+                function togglle(ele) {
+                    var cont = document.getElementById('contt');
+                    if (cont.style.display == 'block') {
+                        cont.style.display = 'none';
+            
+                        document.getElementById(ele.id).value = 'Show DIV';
+                    }
+                    else {
+                        cont.style.display = 'block';
+                        document.getElementById(ele.id).value = 'Hide DIV';
+                    }
+                }
+            </script>
+            
+            <div style="display:none;" id="contt">
+            <br><br><br><br><br><br><br><br><br><br><br>
+            <div class=" pi py-5">   
+            <div class="col-md-6 offset-md-3">
+                        <div class="card" style="width: 36rem;">
+                  <div class= "card-body">
+                      <h1 >Comparative Graphs   </h1>
+                  </div>
+                  <div class="card-body">
+                      <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <script>
+              var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+            
+            // The data for our dataset
+            data: {
+              labels: [1,5, 10,100 ,1000 ,10000 ,100000 ,1000000,10000000 ],
+              datasets: [{
+                  label: 'Comparison Of Number Of Operations (O(logn))',
+                  borderColor: 'rgb(25, 99, 132)',
+                  data: [0, 2.3219,3.3219 , 6.6439, 9.9658, 13.2877, 16.6096 , 19.9316,23.2545]
+              }]
+            },
+            
+            // Configuration options go here
+            options: {}
+            });
+            </script>
+            
+
+
+
+
+
+<script type="text/javascript"> 
+let recursiveFunction = function (arr, x, start, end) { 
+       
+    // Base Condition 
+    if (start > end) return false; 
+   
+    // Find the middle index 
+    let mid=Math.floor((start + end)/2); 
+   
+    // Compare mid with given key x 
+    if (arr[mid]===x) return true; 
+          
+    // If element at mid is greater than x, 
+    // search in the left half of mid 
+    if(arr[mid] > x)  
+        return recursiveFunction(arr, x, start, mid-1); 
+    else
+  
+        // If element at mid is smaller than x, 
+        // search in the right half of mid 
+        return recursiveFunction(arr, x, mid+1, end); 
+} 
+   
+// Driver code 
+
+function binarySearch(){
+var n=parseInt(prompt("Enter the size of an array"));
+ var arr=new Array(n);
+ 
+ for(var i=0; i<arr.length; i++)
+    {
+        arr[i]=parseInt(prompt("Enter array elements (in sorted order)"));
+    }
+    var x=parseInt(prompt("Enter the key element to search: "));
+   
+if (recursiveFunction(arr, x, 0, arr.length-1)) 
+    document.write("Element found!<br>"); 
+else document.write("Element not found!<br>"); 
+}
+</script>                           
+</body>

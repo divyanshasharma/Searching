@@ -1,0 +1,220 @@
+
+<html>
+  <head>
+  <title> Searching algorithms</title>
+  <link href="linearsearch.css" rel="stylesheet" type="text/css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/lightbox.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  
+    <script src="js/lightbox-plus-jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.7.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  
+  <script type="text/javascript">
+               <!--
+   function depthFirstSearch()
+  {
+  
+
+class Graph{
+constructor(noOfVertices)
+{
+  this.noOfVertices = noOfVertices;
+  this.adjList = new Map();
+}
+
+addVertex(v)
+{
+  this.adjList.set(v,[]);
+}
+
+addEdge(v, w)
+{
+  this.adjList.get(v).push(w);
+  this.adjList.get(w).push(v); // doing for undirected Graph
+}
+
+
+
+
+
+      dfs(v)
+{ // depth first traversal
+
+  document.writeln("Ordering of visited vertices is as follows <br>");  
+  let visited = []; // let visited = new Array();
+  let keys = this.adjList.keys();
+  for(let v of keys)
+  {
+    visited[v] = false;
+  }
+  
+  this.dfsRecu(v, visited);
+}
+
+dfsRecu(v, visited)
+{
+  let eList = this.adjList.get(v);
+  visited[v] = true;
+  
+  document.writeln(v);
+  for(let eData in eList)
+  {
+    let e = eList[eData];
+    if(!visited[e])
+    {
+      visited[e] = true;
+      this.dfsRecu(e, visited);
+    }
+  }
+}
+
+
+}
+
+var n=parseInt(prompt("Enter the total number of vertices "));
+var g = new Graph(n);
+var k=parseInt(prompt("Enter the number of edges (using Adjacency List)"));
+var vertices= new Array(n);
+/*
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+
+g.addEdge('A', 'B');
+g.addEdge('B','C');
+g.addEdge('C','D');
+g.addEdge('D','A');
+*/
+for(var tt=0;tt<n;tt++){
+  vertices[tt]='A'+tt;
+g.addVertex(String.fromCharCode(65+tt));
+}
+var innn=new Array(k);
+
+var innnn=new Array(k);      
+for(var i=0; i<k; i++){
+innn[i]=prompt("Enter the source vertex of edge "+(i+1)+" (string only in capital letters) ");
+innnn[i]=prompt("Enter the  destination vertex of edge "+(i+1)+" (string only in capital letters) ");
+g.addEdge(innn[i],innnn[i]);
+}
+g.dfs('A');
+
+
+
+
+  }
+
+  </script>
+  <p id="demo"></p>
+  
+  </head>
+  <body>
+        <h1 class="heading">Depth First Search</h1>
+     <ul>
+  <li><span>
+          <a onclick="depthFirstSearch()">DFS </a></span>
+           
+        </li>
+        <li>
+          <span  >
+          <a onclick="toggle(this)">Algorithm</a> </span>
+  
+         </li>
+       
+         <li>
+          <span  >
+           <a onclick="togglle(this)">Graphical Comparison</a></span>
+            
+         </li>
+      </ul>
+  
+      <div style="display:none;" id="cont">
+          <p><br><br><br><br>
+              <h2>Algorithm</h2><br>
+              DFS(G, u)<br>
+              u.visited = true
+              <br>              for each v ∈ G.Adj[u]
+              <br>if v.visited == false
+              <br>    DFS(G,v)
+               
+              <br>     init() {
+                <br>  For each u ∈ G
+                <br>    u.visited = false
+                <br>For each u ∈ G
+                <br>DFS(G, u)
+                <br> }        
+   
+          </p>
+      </div>
+  </body>
+  <script>
+      function toggle(ele) {
+          var cont = document.getElementById('cont');
+          if (cont.style.display == 'block') {
+              cont.style.display = 'none';
+  
+              document.getElementById(ele.id).value = 'Show DIV';
+          }
+          else {
+              cont.style.display = 'block';
+              document.getElementById(ele.id).value = 'Hide DIV';
+          }
+      }
+  </script>
+  
+  
+  <script>
+      function togglle(ele) {
+          var cont = document.getElementById('contt');
+          if (cont.style.display == 'block') {
+              cont.style.display = 'none';
+  
+              document.getElementById(ele.id).value = 'Show DIV';
+          }
+          else {
+              cont.style.display = 'block';
+              document.getElementById(ele.id).value = 'Hide DIV';
+          }
+      }
+  </script>
+  
+  <div style="display:none;" id="contt">
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <div class=" pi py-5">   
+  <div class="col-md-6 offset-md-3">
+              <div class="card" style="width: 36rem;">
+        <div class= "card-body">
+            <h1 >Comparative Graphs  </h1>
+        </div>
+        <div class="card-body">
+            <canvas id="myChart"></canvas>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+  // The type of chart we want to create
+  type: 'line',
+  
+  // The data for our dataset
+  data: {
+    labels: [2, 4,10,20, 200, 2000, 20000, 200000, 2000000],
+    datasets: [{
+        label: 'Run Time O(V+E) ',
+        borderColor: 'rgb(25, 99, 132)',
+        data: [1,2,5, 10, 100, 1000, 10000, 100000, 1000000]
+    }]
+  },
+  
+  // Configuration options go here
+  options: {}
+  });
+  </script>
+  

@@ -1,0 +1,177 @@
+
+<html>
+  <head>
+  <title> Searching algorithms</title>
+  <link href="linearsearch.css" rel="stylesheet" type="text/css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/lightbox.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  
+    <script src="js/lightbox-plus-jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.7.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  
+<script type="text/javascript">
+             <!--
+             function BFS()
+{
+let bfs = (graph, root) => {
+  let nodesLen = {};
+
+  for(let i = 0; i < graph.length; i++){
+    nodesLen[i] = Infinity; // Idicates that a node is not reachable from the start node
+  }
+  nodesLen[root] = 0; // The distance of the root node from the root node is set to 0
+
+  let queue = [root] // Keep track of nodes we visit
+  let current; // Keep track of the current node we are traversing
+
+  // This loop will keep traversing nodes in the queue until we have no other node to traverse
+  while(queue.length != 0){
+    current  = queue.shift() // Removes the first element in the array
+
+    let curConnected = graph[current] // We get all the nodes connected to the current node
+    let neighborIdx = []
+    let idx = curConnected.indexOf(1) // Gets the index of the first node connected to the current node because the number one in our array shows that the node is connected to anothe node on that index
+
+    // If there is no node at the index of one, the index variable will be set to -1. 
+    while(idx != -1){
+      neighborIdx.push(idx) // So while index does not equals to -1, push our index onto our list of neighbors.
+      idx = curConnected.indexOf(1, idx + 1) // This line searches for the next connected node.
+    }
+
+    // Now that we know all the nodes connected to the current node, we loop through this connected nodes, and get the distance
+    for ( let j = 0; j < neighborIdx.length; j++){
+      if (nodesLen[neighborIdx[j]] == Infinity){ // This line we haven't set the distance from the nodesLen[neighborIdx[j]] yet so we will set now. 
+        nodesLen[neighborIdx[j]] = nodesLen[current] + 1
+        queue.push(neighborIdx[j]) // We push the neighbor to the queue so the next time we go through the while loop, we will check the neighbors of that node too.
+      }
+    }
+  }
+
+  return nodesLen;
+}
+
+let n=parseInt(prompt("Enter the number of nodes "));
+var gfg = new Array(n);
+for(var i=0;i<n;i++)
+{
+   gfg[i]=new Array(n);
+}
+for(var i=0;i<n;i++){
+  for(var j=0;j<n;j++)
+	gfg[i][j]=parseInt(prompt("Enter the element "+i+","+j+" "));
+}
+var ji=bfs(gfg, 1)
+
+for(var i=0;i<n;i++)
+{
+
+document.writeln("<br>The distance of  node "+(i+1)+" from root node is ")
+
+document.writeln(ji[i]);
+}
+}
+
+
+</script>
+</head>
+<body >
+
+    	<h1 class="heading">Breadth First Search</h1>  
+      <ul><li>
+       <span >
+        <a onclick="BFS()">BFS</a></span>
+         
+      </li>
+      <li>
+        <span  > <a onclick="toggle(this)">Algorithm</a> </span>
+
+      </li>
+    
+      <li>
+       <span  >
+        <a onclick="togglle(this)">Graphical Comparison</a></span>
+         
+      </li>
+   </ul>
+
+   <div style="display:none;" id="cont">
+       <p><br><br><br><br>
+           <h2>Algorithm</h2>  <br>
+           create a queue Q <br>
+           mark v as visited and put v into Q <br>
+           while Q is non-empty <br>
+               remove the head u of Q <br>
+               mark and enqueue all (unvisited) neighbours of u<br>
+
+       </p>
+   </div>
+</body>
+<script>
+    function toggle(ele) {
+        var cont = document.getElementById('cont');
+        if (cont.style.display == 'block') {
+            cont.style.display = 'none';
+
+            document.getElementById(ele.id).value = 'Show DIV';
+        }
+        else {
+            cont.style.display = 'block';
+            document.getElementById(ele.id).value = 'Hide DIV';
+        }
+    }
+</script>
+
+
+<script>
+    function togglle(ele) {
+        var cont = document.getElementById('contt');
+        if (cont.style.display == 'block') {
+            cont.style.display = 'none';
+
+            document.getElementById(ele.id).value = 'Show DIV';
+        }
+        else {
+            cont.style.display = 'block';
+            document.getElementById(ele.id).value = 'Hide DIV';
+        }
+    }
+</script>
+
+<div style="display:none;" id="contt">
+<br><br><br><br><br><br><br><br><br><br><br>
+<div class=" pi py-5">   
+<div class="col-md-6 offset-md-3">
+            <div class="card" style="width: 36rem;">
+      <div class= "card-body">
+          <h1 >Comparative Graphs  </h1>
+      </div>
+      <div class="card-body">
+          <canvas id="myChart"></canvas>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+// The type of chart we want to create
+type: 'line',
+
+// The data for our dataset
+data: {
+  labels: [2, 4,10,20, 200, 2000, 20000, 200000, 2000000],
+  datasets: [{
+      label: 'Run Time O(V+E) ',
+      borderColor: 'rgb(25, 99, 132)',
+      data: [1,2,5, 10, 100, 1000, 10000, 100000, 1000000]
+  }]
+},
+
+// Configuration options go here
+options: {}
+});
+</script>

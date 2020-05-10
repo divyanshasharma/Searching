@@ -1,0 +1,216 @@
+<html>
+<head>
+<title> Searching algorithms</title>
+<link href="linearsearch.css" rel="stylesheet" type="text/css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/lightbox.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <script src="js/lightbox-plus-jquery.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.7.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+<script type="text/javascript">
+             <!--
+             function linear()
+{
+    
+/* Hash Table */
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 1000;
+  
+  this.print = function() {
+    document.write(storage)
+  }
+
+  this.add = function(key, value) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key, value]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value]);
+      }
+    }
+  };
+
+
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      
+      document.writeln("Element Not Found");
+        ht.print();
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {     
+      document.writeln("Element  "+storage[index][i][1] + " is found at the entered index: "+ key+"<br> The hash table is as follows in (index,element) format  ");
+        ht.print();
+    
+    
+        }
+      }
+    
+    }
+  };
+
+};
+
+let ht = new HashTable();
+var n=parseInt(prompt("Enter the size of an array"));
+var a=new Array(n);
+var innn=new Array(n);      
+for(var i=0; i<a.length; i++){
+  innn[i]=prompt("Enter the index of array elements (string only) ");
+  a[i]=parseInt(prompt("Enter the element"));
+  ht.add(innn[i], a[i]);
+}
+var k=(prompt("Enter the index of the element to be searched: "));
+var t=ht.lookup(k)
+
+    
+    }
+</script>
+
+<p id="demo"></p>
+
+<body>
+  <body>
+        <h1 class="heading">Search Through Hashing</h1>
+          
+        <ul>
+  <li><span>
+          <a onclick="linear()">Hashing (*Bucket size is 100)</a></span>
+           
+        </li>
+        <li>
+          <span  >
+          <a onclick="toggle(this)">Algorithm</a> </span>
+  
+         </li>
+       
+         <li>
+          <span  >
+           <a onclick="togglle(this)">Graphical Comparison</a></span>
+            
+         </li>
+      </ul><div style="display:none;" id="cont">
+          <p><br><br><br><br>
+              <h2>Algorithm</h2>         <br>
+  
+<u>The pseudocode for insertion is below:</u>
+<br>insert(key, value):
+<br>i = 0
+<br>while i ≠ m:
+<br>    index = hashFn(key, i)
+<br>    if array[index] == null:
+<br>        array[index] = (key, value)
+<br>        return index
+<br>    else:
+<br>        i = i + 1
+<br>error "hash table overflow           
+<br>     <u>
+  <br>The pseudocode for finding an element is below:</u>
+  <br>find(key, value):
+  <br>  i = 0
+  <br>  do:
+  <br>      index = hashFn(key, i)
+  <br>      if array[index].key == key:
+  <br>          return array[index].value
+  <br>      else:
+  <br>          i = i + 1
+  <br>  while array[index] ≠ null or i ≠ m:
+  <br>  error "hash table overflow"
+  
+  </p>
+      </div>
+      
+  </body>
+  <script>
+      function toggle(ele) {
+          var cont = document.getElementById('cont');
+          if (cont.style.display == 'block') {
+              cont.style.display = 'none';
+  
+              document.getElementById(ele.id).value = 'Show DIV';
+          }
+          else {
+              cont.style.display = 'block';
+              document.getElementById(ele.id).value = 'Hide DIV';
+          }
+      }
+  </script>
+  
+  
+  <script>
+      function togglle(ele) {
+          var cont = document.getElementById('contt');
+          if (cont.style.display == 'block') {
+              cont.style.display = 'none';
+  
+              document.getElementById(ele.id).value = 'Show DIV';
+          }
+          else {
+              cont.style.display = 'block';
+              document.getElementById(ele.id).value = 'Hide DIV';
+          }
+      }
+  </script>
+  
+  <div style="display:none;" id="contt">
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <div class=" pi py-5">   
+  <div class="col-md-6 offset-md-3">
+              <div class="card" style="width: 36rem;">
+        <div class= "card-body">
+            <h1 >Comparative Graphs   </h1>
+        </div>
+        <div class="card-body">
+            <canvas id="myChart"></canvas>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+  // The type of chart we want to create
+  type: 'line',
+  
+  // The data for our dataset
+  data: {
+    labels: [1, 10, 100, 1000, 10000, 100000, 1000000],
+    datasets: [{
+        label: 'Time ',
+        borderColor: 'rgb(25, 99, 132)',
+        data: [1,1,1,1,1,1,1]
+    }]
+  },
+  
+  // Configuration options go here
+  options: {}
+  });
+  </script>
+  
