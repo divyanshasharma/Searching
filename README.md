@@ -1,7 +1,7 @@
 @Developed By: Divyansha Sharma
 
 # Searching
-This is GUI project in which we have implemented Searching algorithms 
+This is GUI project in which we have implemented Searching algorithms. 
 Algorithms used are:<br>
 Linear search<br>
 Binary Search<br>
