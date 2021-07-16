@@ -24,3 +24,4 @@ Hashing Technique<br>
 5. Rest, the user is free to explore the project.
 
 **Hope you like it !!**
+It is live at https://searching-algorithms-visualizer.netlify.app/
